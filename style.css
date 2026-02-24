@@ -12,6 +12,10 @@ body {
   align-items: center;
   min-height: 100vh;
   color: white;
+
+  /* Make text sharper */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .app {
@@ -25,7 +29,9 @@ body {
   margin-bottom: 40px;
   font-size: 34px;
   letter-spacing: 1px;
-  text-shadow: 0 0 15px rgba(56, 189, 248, 0.8);
+
+  /* Reduced glow (was 15px) */
+  text-shadow: 0 0 4px rgba(56, 189, 248, 0.4);
 }
 
 .main-container {
@@ -63,6 +69,9 @@ body {
   text-align: center;
   margin-bottom: 25px;
   color: #38bdf8;
+
+  /* Slight glow only */
+  text-shadow: 0 0 3px rgba(56, 189, 248, 0.3);
 }
 
 .toggle {
