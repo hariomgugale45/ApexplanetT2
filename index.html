@@ -2,70 +2,70 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AES Encryption Tool</title>
+  <title>Data Encryption Tool</title>
   <link rel="stylesheet" href="style.css">
 
   <!-- CryptoJS Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 
-<body>
+<body class="wrapper">
 
-<div class="app">
-  <h1>🔐 Password Encryption Tool</h1>
+  <div class="app">
+    <h1>🔐 Password Encryption Tool</h1>
 
-  <div class="main-container">
+    <div class="main-container">
 
-    <!-- Controls Box -->
-    <div class="box">
-      <h2>Controls</h2>
+      <!-- Controls Box -->
+      <div class="box">
+        <h2>Controls</h2>
 
-      <form id="controls">
+        <form id="controls">
 
-        <div class="toggle">
-          <label>
-            <input type="radio" name="mode" value="encrypt" checked>
+          <div class="toggle">
+            <label>
+              <input type="radio" name="mode" value="encrypt" checked>
+              Encrypt
+            </label>
+            <label>
+              <input type="radio" name="mode" value="decrypt">
+              Decrypt
+            </label>
+          </div>
+
+          <div class="full-width">
+            <label>Secret Key</label>
+            <input type="text" id="secret-key" placeholder="Enter secret key" required>
+          </div>
+
+          <button type="submit" id="action-btn" class="primary-btn">
             Encrypt
-          </label>
-          <label>
-            <input type="radio" name="mode" value="decrypt">
-            Decrypt
-          </label>
-        </div>
+          </button>
 
-        <div class="full-width">
-          <label>Secret Key</label>
-          <input type="text" id="secret-key" placeholder="Enter secret key" required>
-        </div>
+        </form>
+      </div>
 
-        <button type="submit" id="action-btn" class="primary-btn">
-          Encrypt
-        </button>
+      <!-- Input Box -->
+      <div class="box">
+        <h2>Input</h2>
+        <textarea id="input-text" placeholder="Enter Input..."></textarea>
+      </div>
 
-      </form>
+      <!-- Output Box -->
+      <div class="box">
+        <h2>Output</h2>
+        <textarea id="output-text" placeholder="Result..." readonly></textarea>
+      </div>
+
     </div>
-
-    <!-- Plain Text Box -->
-    <div class="box">
-      <h2>Input</h2>
-      <textarea id="input-text" placeholder="Enter Input..."></textarea>
-    </div>
-
-    <!-- Cipher Text Box -->
-    <div class="box">
-      <h2>Output</h2>
-      <textarea id="output-text" placeholder="Result..." readonly></textarea>
-    </div>
-
   </div>
-</div>
-<!-- ✅ Footer must be here -->
-<footer class="footer">
-  <p>
+
+  <!-- Footer -->
+  <footer class="footer">
     © 2026 Password Encryption Tool | Developed by Hariom Gugale
-  </p>
-</footer>
-<script src="caesar.js"></script>
+  </footer>
+
+  <script src="caesar.js"></script>
 
 </body>
 </html>
