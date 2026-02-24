@@ -5,35 +5,43 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
+/* Background stays on body */
 body {
   background: linear-gradient(135deg, #0a0f1c, #111827);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   color: white;
-
-  /* Make text sharper */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Wrapper for sticky footer */
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content */
 .app {
+  flex: 1;
   width: 95%;
   max-width: 1300px;
-  animation: fadeIn 1s ease-in-out;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: fadeIn 0.8s ease-in-out;
 }
 
+/* Title */
 .app h1 {
   text-align: center;
+  padding-top: 40px;
   margin-bottom: 40px;
   font-size: 34px;
   letter-spacing: 1px;
-
-  /* Reduced glow (was 15px) */
   text-shadow: 0 0 4px rgba(56, 189, 248, 0.4);
 }
 
+/* Layout */
 .main-container {
   display: flex;
   gap: 30px;
@@ -42,13 +50,14 @@ body {
   flex-wrap: wrap;
 }
 
+/* Boxes */
 .box {
   flex: 1;
   min-width: 300px;
   background: #111827;
   border-radius: 15px;
   padding: 30px;
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
   display: flex;
   flex-direction: column;
   min-height: 480px;
@@ -61,19 +70,18 @@ body {
 }
 
 .box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 35px rgba(56, 189, 248, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
 }
 
 .box h2 {
   text-align: center;
   margin-bottom: 25px;
   color: #38bdf8;
-
-  /* Slight glow only */
   text-shadow: 0 0 3px rgba(56, 189, 248, 0.3);
 }
 
+/* Toggle */
 .toggle {
   display: flex;
   justify-content: center;
@@ -89,11 +97,11 @@ body {
 }
 
 .toggle input[type="radio"] {
-  transform: scale(1.6);
+  transform: scale(1.4);
   margin-right: 10px;
-  cursor: pointer;
 }
 
+/* Inputs */
 label {
   font-size: 14px;
   margin-bottom: 8px;
@@ -109,12 +117,11 @@ textarea {
   font-size: 15px;
   background: #1e293b;
   color: white;
-  transition: 0.3s;
 }
 
 input:focus,
 textarea:focus {
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
 }
 
 .full-width {
@@ -129,6 +136,7 @@ textarea {
   min-height: 280px;
 }
 
+/* Button */
 .primary-btn {
   margin-top: 20px;
   padding: 15px;
@@ -143,15 +151,24 @@ textarea {
 }
 
 .primary-btn:hover {
-  background: linear-gradient(45deg, #0ea5e9, #0284c7);
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
 }
 
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 60px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+
+}
+
+/* Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -159,6 +176,7 @@ textarea {
   }
 }
 
+/* Responsive */
 @media (max-width: 900px) {
   .main-container {
     flex-direction: column;
