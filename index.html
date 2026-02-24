@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Encryption Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <h1>🔐 Password Encryption Tool</h1>
+
+  <div class="main-container">
+
+    <!-- Controls Box -->
+    <div class="box">
+      <h2>Controls</h2>
+
+      <form id="controls">
+
+        <div class="toggle">
+          <label>
+            <input type="radio" name="code" value="encode" checked>
+            Encode
+          </label>
+          <label>
+            <input type="radio" name="code" value="decode">
+            Decode
+          </label>
+        </div>
+
+        <div class="inputs-row">
+          <div>
+            <label>Shift Key</label>
+            <input type="number" id="shift-input" value="3">
+          </div>
+
+          <div>
+            <label>Modulo</label>
+            <input type="number" id="mod-input" value="36">
+          </div>
+        </div>
+
+        <div class="full-width">
+          <label>Alphabet</label>
+          <input type="text" id="alphabet-input"
+            value="abcdefghijklmnopqrstuvwxyz0123456789">
+        </div>
+
+        <div class="inputs-row">
+          <div>
+            <label>Letter Case</label>
+            <select id="letter-case">
+              <option value="1">Maintain</option>
+              <option value="2">Lowercase</option>
+              <option value="3">Uppercase</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Foreign Chars</label>
+            <select id="foreign-chars">
+              <option value="1">Remove</option>
+              <option value="2">Ignore</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="primary-btn">Encrypt</button>
+
+      </form>
+    </div>
+
+    <!-- Plaintext Box -->
+    <div class="box">
+      <h2>Plaintext</h2>
+      <textarea id="input-text" placeholder="Enter text..."></textarea>
+    </div>
+
+    <!-- Encrypted Box -->
+    <div class="box">
+      <h2>Encrypted</h2>
+      <textarea id="output-text" placeholder="Output..." readonly></textarea>
+    </div>
+
+  </div>
+</div>
+
+<script src="caesar.js"></script>
+</body>
+</html>
