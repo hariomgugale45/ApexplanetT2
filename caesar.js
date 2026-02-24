@@ -1,79 +1,64 @@
-// Get DOM elements
-const form = document.getElementById("controls");
-const selectEncodeOrDecode = document.getElementsByName("code");
-const inputText = document.getElementById("input-text");
-const outputText = document.getElementById("output-text");
-const shiftKey = document.getElementById("shift-input");
-const modulo = document.getElementById("mod-input");
-const alphabet = document.getElementById("alphabet-input");
-const letterCase = document.getElementById("letter-case");
-const foreignChars = document.getElementById("foreign-chars");
+document.addEventListener("DOMContentLoaded", function () {
 
-// Form submit event
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
+    const form = document.getElementById("controls");
+    const inputText = document.getElementById("input-text");
+    const outputText = document.getElementById("output-text");
+    const secretKey = document.getElementById("secret-key");
+    const actionBtn = document.getElementById("action-btn");
+    const modeRadios = document.querySelectorAll('input[name="mode"]');
 
-    const inputTextValue = inputText.value;
-    const selectedOption = Array.from(selectEncodeOrDecode).find(option => option.checked).value;
-    const shiftValue = parseInt(shiftKey.value) || 0;
-    const moduloValue = parseInt(modulo.value) || alphabet.value.length;
-    const alphabetValue = alphabet.value;
-    const letterCaseValue = letterCase.value;
-    const foreignCharsValue = foreignChars.value;
+    // Function to update button text
+    function updateButtonText() {
+        const selectedMode = document.querySelector('input[name="mode"]:checked').value;
+        actionBtn.textContent = selectedMode === "encrypt" ? "Encrypt" : "Decrypt";
+    }
 
-    const cipherOutput = caesarCipher(
-        selectedOption,
-        inputTextValue,
-        shiftValue,
-        moduloValue,
-        alphabetValue,
-        foreignCharsValue
-    );
+    // Add change listener to both radio buttons
+   modeRadios.forEach(radio => {
+    radio.addEventListener("change", function () {
 
-    outputText.value = applyLetterCase(cipherOutput, letterCaseValue);
+        updateButtonText();
+
+        // Clear both boxes when mode changes
+        inputText.value = "";
+        outputText.value = "";
+
+    });
 });
 
-// Caesar Cipher Function
-function caesarCipher(mode, text, shift, mod, charset, foreignChars) {
+    // Make sure correct text is set on page load
+    updateButtonText();
 
-    if (mode === "decode") {
-        shift = -shift;
-    }
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    if (foreignChars == 1) {
-        text = removeForeignChars(text);
-    }
+        const text = inputText.value.trim();
+        const key = secretKey.value.trim();
+        const mode = document.querySelector('input[name="mode"]:checked').value;
 
-    charset = charset.toLowerCase();
-    let result = "";
-
-    for (let i = 0; i < text.length; i++) {
-        let char = text[i];
-        const index = charset.indexOf(char.toLowerCase());
-
-        if (index !== -1) {
-            let newIndex = (index + shift) % mod;
-            if (newIndex < 0) newIndex += mod;
-
-            char = char === char.toLowerCase()
-                ? charset[newIndex]
-                : charset[newIndex].toUpperCase();
+        if (!text || !key) {
+            alert("Please enter both text and secret key!");
+            return;
         }
 
-        result += char;
-    }
+        try {
+            if (mode === "encrypt") {
+                const encrypted = CryptoJS.AES.encrypt(text, key).toString();
+                outputText.value = encrypted;
+            } else {
+                const decrypted = CryptoJS.AES.decrypt(text, key)
+                    .toString(CryptoJS.enc.Utf8);
 
-    return result;
-}
+                if (!decrypted) {
+                    alert("Wrong key or invalid ciphertext!");
+                    return;
+                }
 
-// Remove foreign characters
-function removeForeignChars(input) {
-    return input.replace(/[^a-zA-Z0-9 ]/g, "");
-}
+                outputText.value = decrypted;
+            }
+        } catch (error) {
+            alert("Error during encryption/decryption!");
+        }
+    });
 
-// Apply letter case
-function applyLetterCase(text, option) {
-    if (option == 2) return text.toLowerCase();
-    if (option == 3) return text.toUpperCase();
-    return text;
-}
+});
